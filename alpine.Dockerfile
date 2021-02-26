@@ -1,5 +1,5 @@
 FROM nginx:1.19.3-alpine
-LABEL maintainer="Jason Wilder mail@jasonwilder.com"
+LABEL maintainer="Abhimanyu Saharan <desk.abhimanyu@gmail.com>"
 
 # Install wget and install/updates certificates
 RUN apk add --no-cache --virtual .run-deps \
@@ -25,6 +25,8 @@ COPY network_internal.conf /etc/nginx/
 
 COPY . /app/
 WORKDIR /app/
+
+RUN chown $USER /app/*.sh
 
 ENV DOCKER_HOST unix:///tmp/docker.sock
 

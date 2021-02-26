@@ -1,5 +1,5 @@
 FROM nginx:1.19.3
-LABEL maintainer="Jason Wilder mail@jasonwilder.com"
+LABEL maintainer="Abhimanyu Saharan <desk.abhimanyu@gmail.com>"
 
 # Install wget and install/updates certificates
 RUN apt-get update \
@@ -26,8 +26,10 @@ RUN wget https://github.com/jwilder/docker-gen/releases/download/$DOCKER_GEN_VER
 
 COPY network_internal.conf /etc/nginx/
 
-COPY nginx-proxy /app/
+COPY . /app/
 WORKDIR /app/
+
+RUN chown $USER:$USER /app/*.sh
 
 ENV DOCKER_HOST unix:///tmp/docker.sock
 
